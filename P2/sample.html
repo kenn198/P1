@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <link rel="stylesheet" href="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        * {
+        box-sizing: border-box;
+        }
+
+        .left {
+        background-color: #2196F3;
+        padding: 20px;
+        float: left;
+        width: 20%; /* The width is 20%, by default */
+        }
+
+        .main {
+        background-color: #f1f1f1;
+        padding: 20px;
+        float: left;
+        width: 60%; /* The width is 60%, by default */
+        }
+
+        .right {
+        background-color: #04AA6D;
+        padding: 20px;
+        float: left;
+        width: 20%; /* The width is 20%, by default */
+        }
+
+        @media screen and (max-width: 800px) {
+        .left, .main, .right {
+            width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+        }
+        }
+</style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="left">
+            <p>Left Menu</p>
+        </div>
+
+        <div class="main">
+            <p>Main Content</p>
+        </div>
+
+        <div class="right">
+            <p>Right Content</p>
+        </div>
+        <picture>
+            <source srcset="/P2/pic/pic_2.jpg" media="(max-width: 600px)">
+            <source srcset="/P2/pic/pic_1.jpg">
+            <img src="/P2/pic/pic_1.jpg" alt="Pic" style="width:50%;">
+        </picture>
+        <script src="" async defer></script>
+    </body>
+</html>

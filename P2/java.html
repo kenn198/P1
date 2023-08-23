@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .inline-container {
+                display: flex;
+                align-items: center;
+            }
+            #replaces {
+                margin-right: 10px;
+            }
+            .space{
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- text HTML code here -->
+        <H2 class="inline-container">List of items are&nbsp; <div id="text"> Apple, Banana, Kiwi</div></H2>
+        <p>1. Slicing : <span id="slice"></span></p>
+ 
+        <div class="inline-container">
+            <div>2. Replacing :</div>
+            <div id="replaces">Apple, Banana, Kiwi</div>
+            <button onclick="replace()">replace</button>
+        </div>
+        <div class="inline-container">3. Converts header to upper case <button class="space" onclick="upper()"> try me</button></div>
+        <div class="inline-container">4. Converts header to lower case <button class="space" onclick="lower()"> try me</button></div>
+        <p>5. List length: <span id="length"></span></p>
+
+        <!-- number HTML code here -->
+        <H2 class="inline-container">Number :&nbsp;<div id="number"> 200.7524321</div></H2>
+        <p>6. Fixed to 2 decimal places: <span id="fixed"></span></p>
+        <p>7. Rounded up: <span id="rounded"></span></p>
+        <p>8. Random number between 0 and 1: <span id="random"></span></p>
+        <p>9. Exponential number of 2 of random number: <span id="expo"></span></p>
+        <p>10. Precision of the random by 3: <span id="precision"></span></p>
+
+        <!-- text Array code here -->
+        <h2 class="inline-container">Array :&nbsp;<div id="array"></div></h2>
+        <div class="inline-container">
+            <div>11&12. Add to the array with push and join:</div>
+            <input type="text" id="inputValue" placeholder="Enter a value">
+            <button onclick="addToArray()">Add</button>
+        </div>
+        <div class="inline-container">13. Length of the array:&nbsp; <span id="arrayLength"></span></div>
+        <div class="inline-container">14. Shift on the array:&nbsp; 
+            <span id="shift"></span>
+            <button onclick="shiftArray()">shift</button>
+        </div>
+        <div class="inline-container">15. Pop on the array:&nbsp; 
+            <span id="pop"></span>
+            <button onclick="popArray()">pop</button>
+        </div>
+
+        <!--Date code here-->
+        <h2 class="inline-container">Date :&nbsp;<div id="date"></div></h2>
+        <p class="inline-container"><div>16. Get Day:&nbsp;<span id="Day"></span></p>
+        <p class="inline-container"><div>17. Get Month:&nbsp;<span id="Month"></span></p>
+        <p class="inline-container"><div>18. Get Year:&nbsp;<span id="Year"></span></p>
+        <p class="inline-container"><div>19. Get Hours:&nbsp;<span id="Hours"></span></p>
+        <p class="inline-container"><div>20. Get Miliseconds:&nbsp;<span id="Miliseconds"></span></p>
+
+        <script>
+            // text JS code here
+            let text = document.getElementById("text").innerHTML;
+            let part = text.slice(7,14);
+            document.getElementById("slice").innerHTML = part; 
+            document.getElementById("length").innerHTML = text.length;
+            function replace() {
+                let text = document.getElementById("replaces").innerHTML; 
+                document.getElementById("replaces").innerHTML =
+                text.replace(/Apple|Banana|Kiwi/,"Strawberry");
+            }
+            function upper() {
+                
+                document.getElementById("text").innerHTML = text.toUpperCase();
+            }
+            function lower() {
+ 
+                document.getElementById("text").innerHTML = text.toLowerCase();
+            }
+
+            // number JS code here
+            let number = parseFloat(document.getElementById("number").innerHTML);
+            document.getElementById("fixed").innerHTML = number.toFixed(2);
+            let random = Math.random();
+            document.getElementById("rounded").innerHTML = Math.round(number);
+            document.getElementById("random").innerHTML = random;
+            document.getElementById("expo").innerHTML = random.toExponential(2);
+            document.getElementById("precision").innerHTML = random.toPrecision(3);
+
+            // array JS code here
+            const myArray = []; // Initialize an empty array
+            // Update the array span
+            function UpdateArray(){
+                // Update the content of the array span
+                document.getElementById("array").textContent = myArray.join(", ");
+                // Update the length of the array span
+                document.getElementById("arrayLength").innerHTML = myArray.length;
+            }
+            function addToArray() {
+                const inputValue = document.getElementById("inputValue").value;
+                myArray.push(inputValue); // Add the input value to the array
+                UpdateArray();
+            }
+            // update the shift of the array span
+            function shiftArray() {
+                document.getElementById("shift").innerHTML = myArray.shift();
+                UpdateArray();
+            }
+            // update the pop of the array span
+            function popArray() {
+                document.getElementById("pop").innerHTML = myArray.pop();
+                UpdateArray();
+            }
+
+            // date JS code here
+            let date = new Date(); // Create a new date object
+            // Update the date span
+            function updateDate() {
+                document.getElementById("date").innerHTML = date;
+            }
+            updateDate();
+            // Update the day span
+            document.getElementById("Day").innerHTML = date.getDay();
+            // Update the month span
+            document.getElementById("Month").innerHTML = date.getMonth();
+            // Update the year span
+            document.getElementById("Year").innerHTML = date.getFullYear();
+            // Update the hours span
+            document.getElementById("Hours").innerHTML = date.getHours();
+            // Update the miliseconds span
+            document.getElementById("Miliseconds").innerHTML = date.getMilliseconds();
+        </script>
+    </body>
+</html>
