@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+  <script src="https://unpkg.com/vue@3.2.20/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Todo App</h1>
+    
+    <div>
+      <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+      <button @click="addTodo">Add</button>
+    </div>
+    
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index">
+        <input type="checkbox" v-model="todo.completed">
+        <span :class="{ 'completed': todo.completed }">{{ todo.text }}</span>
+        <button @click="deleteTodo(index)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    const app = createApp({
+      setup() {
+        const newTodo = ref('');
+        const todos = ref([]);
+
+        const addTodo = () => {
+          if (newTodo.value.trim() === '') return;
+          todos.value.push({ text: newTodo.value, completed: false });
+          newTodo.value = '';
+        };
+
+        const deleteTodo = index => {
+          todos.value.splice(index, 1);
+        };
+
+        return { newTodo, todos, addTodo, deleteTodo };
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
