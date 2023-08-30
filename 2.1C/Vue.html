@@ -22,18 +22,31 @@
     <div v-for="item in items" v-if="item !== 'Skip'">{{ item }}</div>
     
     <!-- Form Input Handling -->
-    <input type="text" v-model="inputText">
-    <p>Input value: {{ inputText }}</p>
+    <div>
+      <input type="text" v-model="inputText" id="inputText">
+      <button @click="addText">Add Text</button>
+    </div>
+    
+    <ul>
+      <li v-for="item in items" :key="item">{{ item }}</li>
+    </ul>
   </div>
 
   <script>
-    const app = Vue.createApp({
+    const { createApp, ref } = Vue;
+
+    const app = createApp({
       setup() {
-        return {
-          showText: true,
-          items: ['Item 1', 'Item 2', 'Item 3', 'Skip', 'Item 4'],
-          inputText: ''
+        const showText = ref(t  );
+        const items = ref(['Item 1', 'Item 2', 'Item 3', 'Skip', 'Item 4']);
+        const inputText = ref('');
+
+        const addText = () => {
+          items.value.push(inputText.value);
+          inputText.value = ''; // Clear the input field
         };
+
+        return { showText, items, inputText, addText };
       }
     });
 
