@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health & Fitness Progress Tracker</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            background-color: greenyellow;
+        }
+
+        .centered-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center by default */
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-section label {
+            margin-bottom: 5px;
+        }
+
+        .form-section input {
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .header-container {
+            overflow-x: auto; /* Enable scrolling for the header */
+        }
+
+        @media screen and (max-width: 600px) {
+            .centered-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start; /* Shift to left below 600px */
+                padding: 20px; /* Add some spacing */
+            }
+
+            .form-section {
+                align-items: flex-start;
+            }
+
+            header {
+                order: 1;
+                text-align: center; /* Center the title */
+                margin-right: 0; /* Reset margin for title */
+                white-space: nowrap; /* Prevent the title from wrapping */
+                overflow: auto; /* Enable horizontal scrolling for the header */
+
+                @media screen and (max-width: 600px) {
+                    margin-top: 10%;
+                    font-size: 1.5rem;
+                    
+                }
+            }   
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header-container"> <!-- Wrap the header in a container -->
+            <header>
+                <h1>Welcome to Health & Fitness Progress Tracker</h1>
+            </header>
+        </div>
+        <main class="centered-container">
+            <section class="registration-form form-section">
+                <h2>Register</h2>
+                <form @submit.prevent="register">
+                    <div>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" v-model="registrationData.username" required>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" v-model="registrationData.password" required>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+            </section>
+            <section class="login-form form-section">
+                <h2>Login</h2>
+                <form @submit.prevent="login">
+                    <div>
+                        <label for="loginUsername">Username:</label>
+                        <input type="text" id="loginUsername" v-model="loginData.username" required>
+                    </div>
+                    <div>
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" v-model="loginData.password" required>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+            </section>
+            <section class="todo-list form-section">
+                <h2>Todo List</h2>
+                <div>
+                  <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+                  <button @click="addTodo">Add</button>
+                </div>
+                <ul>
+                  <li v-for="(todo, index) in todos" :key="index">
+                    <input type="checkbox" v-model="todo.completed">
+                    <span :class="{ 'completed': todo.completed }">{{ todo.text }}</span>
+                    <button @click="deleteTodo(index)">Delete</button>
+                  </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.4/dist/vue.global.min.js"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            data() {
+                const newTodo = ref('');
+                const todos = ref([]);
+
+                const addTodo = () => {
+                    if (newTodo.value.trim() === '') return;
+                    todos.value.push({ text: newTodo.value, completed: false });
+                    newTodo.value = '';
+                };
+                const deleteTodo = index => {
+                    todos.value.splice(index, 1);
+                };
+                return {
+                    registrationData: {
+                        username: '',
+                        password: ''
+                    },
+                    loginData: {
+                        username: '',
+                        password: ''
+                    },
+                    newTodo, todos, addTodo, deleteTodo 
+                };
+            },
+            methods: {
+                register() {
+                    // Simulate user registration (to be implemented later)
+                    console.log('User registered:', this.registrationData);
+                },
+                login() {
+                    // Simulate user login (to be implemented later)
+                    console.log('User logged in:', this.loginData);
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
